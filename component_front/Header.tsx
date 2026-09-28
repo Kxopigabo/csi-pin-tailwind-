@@ -18,7 +18,7 @@ export default function Header() {
         </div>
         <div>
           {/* name */}
-          <Badge className="mt-4">รักฟ้าใสจุ๊บๆ</Badge>
+          <Badge className="mt-4"></Badge>
         </div>
       </div>
     </>
