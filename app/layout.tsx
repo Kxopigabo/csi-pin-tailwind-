@@ -32,9 +32,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               Animetion
             </Button>
           </Link>
-          <Link href="/claculator">
+          <Link href="/calculator">
             <Button
-              appearance={pathname === "/claculator" ? "fill" : "outline"}
+              appearance={pathname === "/calculator" ? "fill" : "outline"}
               variant="primary"
             >
               Calculator
