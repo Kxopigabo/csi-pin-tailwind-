@@ -26,6 +26,8 @@ export default function Page() {
   const [y, setY] = useState(0);
   const [moveLeft, setMoveLeft] = useState(true);
   const [moveDown, setMoveDown] = useState(true);
+  const [rotation, setRotation] = useState(0);
+  const [rotationDirection, setRotationDirection] = useState(1); // 1 = clockwise, -1 = counter-clockwise
   //default
   const _fieldWidth = fieldWidth || 640;
   const _fieldHeight = fieldHeight || 480;
@@ -51,6 +53,7 @@ export default function Page() {
   const yRef = useRef(0);
   const moveLeftRef = useRef(true);
   const moveDownRef = useRef(true);
+  const rotationDirectionRef = useRef(1);
 
   // Sync refs with state
   useEffect(() => {
@@ -58,7 +61,8 @@ export default function Page() {
     yRef.current = y;
     moveLeftRef.current = moveLeft;
     moveDownRef.current = moveDown;
-  }, [x, y, moveLeft, moveDown]);
+    rotationDirectionRef.current = rotationDirection;
+  }, [x, y, moveLeft, moveDown, rotationDirection]);
 
   // keyboard event
   useEffect(() => {
@@ -110,6 +114,16 @@ export default function Page() {
       ballRef.current.style.backgroundImage = `url(${student})`;
   }, [ballType]);
 
+  // continuous rotation
+  useEffect(() => {
+    const rotationTimer = setInterval(() => {
+      if (runing) {
+        setRotation(prev => prev + (2 * rotationDirectionRef.current));
+      }
+    }, 50);
+    return () => clearInterval(rotationTimer);
+  }, [runing]);
+
 
   //movement calculation
   const calculateNextFrame = () => {
@@ -126,6 +140,7 @@ export default function Page() {
         currentX = maxX - (currentX - maxX);
         currentMoveLeft = false;
         setMoveLeft(false);
+        setRotationDirection(prev => -prev);
       }
     } else {
       currentX = currentX - xVelocity / frameRate;
@@ -133,6 +148,7 @@ export default function Page() {
         currentX = -currentX;
         currentMoveLeft = true;
         setMoveLeft(true);
+        setRotationDirection(prev => -prev);
       }
     }
 
@@ -143,6 +159,7 @@ export default function Page() {
         currentY = maxY - (currentY - maxY);
         currentMoveDown = false;
         setMoveDown(false);
+        setRotationDirection(prev => -prev);
       }
     } else {
       currentY = currentY - yVelocity / frameRate;
@@ -150,6 +167,7 @@ export default function Page() {
         currentY = -currentY;
         currentMoveDown = true;
         setMoveDown(true);
+        setRotationDirection(prev => -prev);
       }
     }
 
@@ -182,7 +200,7 @@ return (
         >
           {/* ball */}
           <div
-            className="border border-gray-800 rounded-full absolute "
+            className="border border-gray-800 rounded-full absolute"
             style={{
               left: `${x}px`,
               top: `${y}px`,
@@ -191,6 +209,7 @@ return (
               backgroundColor: "lightblue",
               backgroundSize: "cover",
               backgroundPosition: "center",
+              transform: `rotate(${rotation}deg)`,
             }}
             ref={ballRef}
           ></div>

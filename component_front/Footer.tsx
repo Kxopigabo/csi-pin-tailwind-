@@ -9,7 +9,7 @@ export default function Footer() {
     /* con */
     <>
       <div className=" flex justify-center mt-2 ">
-        <Badge className="bg-primary text-black text-lg">
+        <Badge className="bg-blue-100 text-black text-lg rounded-lg">
           68052331 ภูเกล้า ผ่องเพ็ญศรี
         </Badge>
       </div>
