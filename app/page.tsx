@@ -31,6 +31,15 @@ export default function Home() {
                 <Badge color="gray" className="block">
                   Sripatum University (SPU)
                 </Badge>
+                <div className="text-center font-bold text-sm mt-20">
+                  Field of work I would like to pursue
+                </div>
+                <Badge color="purple" className="block">
+                  DevOps & Cloud Infrastructure
+                </Badge>
+                <Badge color="sky" className="block">
+                  Data Science & Analytics
+                </Badge>
               </div>
             </div>
           </div>

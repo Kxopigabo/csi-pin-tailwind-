@@ -48,7 +48,7 @@ export default function Page() {
 
   const [showDialogOpen, setshowDialogOpen] = useState(false);
 
-  // localStorage
+  //localStorage
   useEffect(() => {
     const _todoRawStr = localStorage.getItem("todosRaw");
     if (_todoRawStr === null) { 
